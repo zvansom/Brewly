@@ -7,7 +7,11 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
-  res.send('signup stubbed');
+  res.render('auth/signup');
 });
+
+router.post('/signup', (req, res) => {
+  res.send('signup form submitted');
+})
 
 module.exports = router;
