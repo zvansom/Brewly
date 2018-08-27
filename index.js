@@ -1,9 +1,13 @@
+const ejsLayouts = require('express-ejs-layouts');
 const express = require('express');
 
 const app = express();
 
+app.set('view engine', 'ejs');
+app.use(ejsLayouts);
+
 app.get('/', (req, res) => {
-  res.send('stubbed')
+  res.render('home')
 });
 
 app.listen(3000, () => console.log('You\'re listening to the smooth sounds of port 3000 in the morning.') );
