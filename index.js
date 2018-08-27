@@ -6,6 +6,8 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(ejsLayouts);
 
+app.use('/auth', require('./controllers/auth'));
+
 app.get('/', (req, res) => {
   res.render('home')
 });
