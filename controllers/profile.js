@@ -2,6 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
+const db = require("../models");
+
 const loggedIn = require('../middleware/loggedIn');
 
 router.get('/', loggedIn, (req, res) => {
@@ -17,7 +19,10 @@ router.get('/new', loggedIn, (req, res) => {
 });
 
 router.post('/new', loggedIn, (req, res) => {
-  res.send('form submitted');
+  db.recipe.create({ 
+    name: req.body.name
+   });
+  res.send(req.body);
 });
 
 router.get('/find', loggedIn, (req, res) => {
