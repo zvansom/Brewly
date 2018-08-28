@@ -1,1 +1,14 @@
 <h2><%= currentUser.firstname %>'s Recipes</h2>
+
+<% recipes.forEach(r => { %> 
+  <div>
+    <h4><%= r.name %></h4>
+    <% const parsedIngredients = JSON.parse(r.ingredients) %> 
+    <h5>Malts</h5>
+    <% parsedIngredients.malts.forEach( m => { %>
+      <p>Malt: <%= m.maltName %> <%= m.maltQty %> <%= m.maltUnit %>  </p>
+    <% }) %> 
+    <% console.log(parsedIngredients) %>
+  </div>
+
+<% }); %> 
