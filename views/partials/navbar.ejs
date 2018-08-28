@@ -2,8 +2,15 @@
   <div class="nav-wrapper light-green darken-1">
     <a href="/" class="brand-logo">Brewly</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <% if (currentUser) { %> 
+      <li><a href="/auth/login">My Recipes</a></li>
+      <li><a href="/auth/login">Find a Recipe</a></li>
+      <li><a href="/auth/login">Add a Recipe</a></li>
+      <li><a href="/auth/login">Logout</a></li>
+      <% } else { %> 
       <li><a href="/auth/login">Login</a></li>
       <li><a href="/auth/signup">Signup</a></li>
+      <% } %> 
     </ul>
   </div>
 </nav>
