@@ -11,62 +11,38 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      abv: {
+      style: {
+        type: Sequelize.STRING
+      },
+      batchSize: {
         type: Sequelize.INTEGER
+      },
+      abv: {
+        type: Sequelize.FLOAT
       },
       ibu: {
-        type: Sequelize.INTEGER
-      },
-      target_og: {
-        type: Sequelize.INTEGER
-      },
-      target_fg: {
-        type: Sequelize.INTEGER
-      },
-      ebc: {
         type: Sequelize.INTEGER
       },
       srm: {
         type: Sequelize.INTEGER
       },
-      batch_size: {
+      ebc: {
         type: Sequelize.INTEGER
       },
-      mash_temp: {
+      targetOg: {
+        type: Sequelize.STRING
+      },
+      targetFg: {
+        type: Sequelize.STRING
+      },
+      mashTemp: {
         type: Sequelize.INTEGER
       },
-      fermentation_temp: {
+      fermTemp: {
         type: Sequelize.INTEGER
       },
       ingredients: {
         type: Sequelize.TEXT
-      },
-      brewing_notes: {
-        type: Sequelize.TEXT
-      },
-      hop_notes: {
-        type: Sequelize.TEXT
-      },
-      yeast_notes: {
-        type: Sequelize.TEXT
-      },
-      fermentation_notes: {
-        type: Sequelize.TEXT
-      },
-      hydrometer_readings: {
-        type: Sequelize.STRING
-      },
-      kegging_notes: {
-        type: Sequelize.TEXT
-      },
-      tasting_notes: {
-        type: Sequelize.TEXT
-      },
-      punk_id: {
-        type: Sequelize.INTEGER
-      },
-      batch_number: {
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
