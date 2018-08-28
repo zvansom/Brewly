@@ -16,6 +16,10 @@ router.get('/new', loggedIn, (req, res) => {
   res.render('profile/new');
 });
 
+router.post('/new', loggedIn, (req, res) => {
+  res.send('form submitted');
+});
+
 router.get('/find', loggedIn, (req, res) => {
   res.render('profile/find');
 });

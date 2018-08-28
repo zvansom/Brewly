@@ -1,1 +1,117 @@
-<h2>Add a new recipe</h2>
+<h2>Add a new beer recipe</h2>
+
+<form action='/profile/new' method='post'>
+  <h3>Meta Data</h3>
+  <label for='name'>Name</label>
+  <input id='name' type='text' name='name'>
+
+  <label for='style'>Style</label>
+  <input id='style' type='text' name='style'>
+
+  <label for='batchSize'>Batch Size</label>
+  <input id='batchSize' type='text' name='batchSize'>
+
+  <br>
+  <br>
+
+  <label for='abv'>ABV</label>
+  <input id='abv' type='integer' name='abv'>
+
+  <label for='ibu'>IBU</label>
+  <input id='ibu' type='integer' name='ibu'>
+
+  <label for='srm'>SRM</label>
+  <input id='srm' type='integer' name='srm'>
+
+  <label for='ebc'>EBC</label>
+  <input id='ebc' type='integer' name='ebc'>
+
+  <br>
+  <br>
+  
+  <label for='target-og'>Target Original Gravity</label>
+  <input id='target-og' type='integer' name='target-og-low'> - 
+  <input type='integer' name='target-og-high'>
+
+  <label for='target-fg'>Target Final Gravity</label>
+  <input id='target-fg' type='integer' name='target-fg-low'> - 
+  <input type='integer' name='target-fg-high'>
+
+  <br>
+  <br>
+
+  <label for='mash-temp'>Mash Temperature</label>
+  <input id='mash-temp' type='integer' name='mashTemp'> F
+
+  <label for='ferm-temp'>Fermentation Temperature</label>
+  <input id='ferm-temp' type='integer' name='fermTemp'> F
+
+  <br>
+  <br>
+
+  <h3>Ingredients</h3>
+
+  <h4>Malts</h4>
+  <label for='malt-name'>Name</label>
+  <input id='malt-name' type='text' name='maltName'>
+
+  <label for='malt-qty'>Amount</label>
+  <input id='malt-qty' type='integer' name='maltQty'>
+  
+  <label for='malt-unit'>Unit</label>
+  <select id='malt-unit' name="maltUnit">
+    <option value='lbs'>lbs</option>
+    <option value='oz'>oz</option>
+  </select>
+  
+  <label for='malt-extract'>Extract</label>
+  <input type="checkbox" id="malt-extract" name="malt-extract" value="extract" />
+
+  <br>
+  <br>
+  
+  <h4>Hops</h4>
+  <label for='hop-name'>Name</label>
+  <input id='hop-name' type='text' name='hop-name'>
+
+  <label for='adjunct-qty'>Amount (oz)</label>
+  <input id='adjunct-qty' type='integer' name='adjunctQty'>
+  
+  <label for='adjunct-time'>Time</label>
+  <select id='adjunct-time' name='adjunctTime'>
+    <option value='90'>90 mins</option>
+    <option value='75'>75 mins</option>
+    <option value='60'>60 mins</option>
+    <option value='45'>45 mins</option>
+    <option value='30'>30 mins</option>
+    <option value='15'>15 mins</option>
+  </select>
+
+  <br>
+  <br>
+
+  <h4>Adjuncts</h4>
+  <label for='adjuncts-name'>Name</label>
+  <input id='adjuncts-name' type='text' name='adjunctName'>
+
+  <label for='malt-qty'>Amount (oz)</label>
+  <input id='malt-qty' type='integer' name='maltQty'>
+  
+  <label for='malt-unit'>Unit</label>
+  <select id='malt-unit' name="maltUnit">
+    <option value='lbs'>lbs</option>
+    <option value='oz'>oz</option>
+  </select>
+
+  <br>
+  <br>
+
+  <h4>Yeast</h4>
+  <label for='yeast-name'>Name</label>
+  <input id='yeast-name' type='text' name='yeastName'>
+
+  <br>
+  <br>
+
+  <input id='submit-new' type='submit' value='submit'>
+</form>
