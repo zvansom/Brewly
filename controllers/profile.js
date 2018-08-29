@@ -1,4 +1,5 @@
 const express = require('express');
+const request = require('request');
 
 const router = express.Router();
 
@@ -66,7 +67,15 @@ router.post('/new', loggedIn, (req, res) => {
 });
 
 router.get('/find', (req, res) => {
-  res.render('profile/find');
+  res.render('profile/find', {results: null});
+});
+
+router.post('/find', (req, res) => {
+  const url = `https://api.punkapi.com/v2/beers?beer_name=${req.body.search}`;
+  request(url, function(error, response, body) {
+    const parsedResponse = JSON.parse(body); 
+    res.render('profile/find', { results: parsedResponse });
+  })
 });
 
 module.exports = router;

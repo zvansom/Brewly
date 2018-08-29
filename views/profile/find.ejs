@@ -1,7 +1,16 @@
 <h2>Find a new recipe</h2>
 
-<form id="search-form">
+<form id="search-form" action="/profile/find" method="post">
   <label for="search">Search for a new beer!</label>
   <input type="text" name="search" id="search" >
   <input type="submit" value="search">
 </form>
+
+<% if(results) { %> 
+<h2>Search results</h2>
+<% results.forEach( result => { %>
+<div>
+  <h4><%= result.name %></h4>
+</div>
+<% }); %> 
+<% } %> 
