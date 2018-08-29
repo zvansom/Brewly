@@ -1,0 +1,43 @@
+<h2><%= recipe.name %> </h2>
+<h3><%= recipe.style %> </h3>
+
+<h4>Meta data</h4>
+Batch Size: <%= recipe.batchSize %> <br>
+ABV: <%= recipe.abv %> <br>
+IBU: <%= recipe.ibu %> <br>
+SRM: <%= recipe.srm %> <br>
+EBC: <%= recipe.ebc %> <br>
+Target Starting Gravity: <%= recipe.targetOg %> <br>
+Target Final Gravity: <%= recipe.targetFg %> <br>
+Mash Temperature: <%= recipe.mashTemp %> <br>
+Fermentation Temperature: <%= recipe.fermTemp %> 
+
+<br><br>
+
+<h4>Ingredients</h4>
+<% const parsedIngredients = JSON.parse(recipe.ingredients) %> 
+    <h5>Malts</h5>
+    <% parsedIngredients.malts.forEach( m => { %>
+      <div>
+        <p>Malt: <%= m.maltName %> <%= m.maltQty %> <%= m.maltUnit %>  </p>
+      </div>
+    <% }) %> 
+    <h5>Hops</h5>
+    <% parsedIngredients.hops.forEach( h => { %>
+      <div>
+        <p>Hop: <%= h.hopName %> <%= h.hopQty %> <%= h.hopUnit %>  </p>
+      </div>
+    <% }) %> 
+    <% if (parsedIngredients.adjuncts) { %> 
+      <h5>Adjuncts</h5>
+      <% parsedIngredients.adjuncts.forEach( a => { %>
+        <div>
+          <p>Adjunct: <%= a.adjunctName %> <%= a.adjunctQty %> oz </p>
+        </div>
+      <% }) %> 
+    <% } %>
+    <h5>Yeast</h5>
+    <div>
+      <p>Yeast: <%= parsedIngredients.yeast %></p>
+    </div>
+  </div>

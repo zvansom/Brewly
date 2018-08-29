@@ -8,7 +8,7 @@ const db = require("../models");
 const loggedIn = require('../middleware/loggedIn');
 
 router.get('/', loggedIn, (req, res) => {
-  res.render('profile/index')
+  res.render('profile/index');
 });
 
 router.get('/recipes', loggedIn, (req, res) => {
@@ -16,6 +16,7 @@ router.get('/recipes', loggedIn, (req, res) => {
   .then(recipes => res.render('profile/recipes', { recipes } ))
   .catch(err => res.send(err));
 });
+
 
 router.get('/new', loggedIn, (req, res) => {
   res.render('profile/new');
@@ -69,7 +70,7 @@ router.post('/new', loggedIn, (req, res) => {
     res.redirect('/profile');
 });
 
-router.get('/find', loggedIn, (req, res) => {
+router.get('/find', (req, res) => {
   res.render('profile/find', {results: null});
 });
 
@@ -78,7 +79,13 @@ router.post('/find', loggedIn, (req, res) => {
   request(url, function(error, response, body) {
     const parsedResponse = JSON.parse(body); 
     res.render('profile/find', { results: parsedResponse });
-  })
+  });
+});
+
+router.get('/recipes/:id', loggedIn, (req, res) => {
+  db.recipe.findOne({ where: { id: req.params.id } })
+    .then(recipe => res.render('profile/show', { recipe }))
+    .catch(err => res.send(err));
 });
 
 module.exports = router;
