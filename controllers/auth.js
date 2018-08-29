@@ -22,7 +22,7 @@ router.get('/signup', (req, res) => {
 
 router.post('/signup', (req, res) => {
   if (req.body.password !== req.body.confirm_password) {
-    // TODO: Get flash message working for non-matching passwords.
+    req.flash('error', 'Passwords don\'t match.  Please try again.');
     res.redirect('/auth/signup');
   } else {
     db.user.findOrCreate({
@@ -54,19 +54,5 @@ router.get('/logout', (req, res) => {
   req.flash('success', 'Successfully logged out!');
   res.redirect('/');
 });
-
-/* OAUTH ROUTES */
-// This calls the passport-facebook strategy (located in passport config)
-// router.get('/facebook', passport.authenticate('facebook', {
-//   scope: ['public_profile', 'email']
-// }));
-
-// // Handle the response/callback from facebook
-// router.get('/callback/facebook', passport.authenticate('facebook', {
-//   successRedirect: '/profile',
-//   successFlash: 'facebook login successful',
-//   failureRedirect: '/auth/login',
-//   failureFlash: 'Oops, FB fail'
-// }));
 
 module.exports = router;

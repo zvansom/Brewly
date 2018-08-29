@@ -65,7 +65,7 @@ router.post('/new', loggedIn, (req, res) => {
     res.redirect('/profile');
 });
 
-router.get('/find', loggedIn, (req, res) => {
+router.get('/find', (req, res) => {
   res.render('profile/find');
 });
 

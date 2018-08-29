@@ -159,21 +159,21 @@ res: {
 | METHOD | PATH | PURPOSE |
 | ------- | -------------------------- | -----------------------------------|
 | GET | / | Home page |
-| GET | /login | Login form |
-| POST | /login | Receive and authenticate user |
-| GET | /signup | New user signup form |
-| POST | /signup | Receive form and add new user to db |
-| GET | /recipes/ | Users recipe box |
-| GET | /recipes/find | Recipe finder |
-| GET | /recipes/new | New recipe form |
-| POST | /recipes/new | Receive new recipe and add to db |
-| GET | /recipes/:id | Show requested recipe |
-| POST | /recipes/:id | Make new batch of recipe |
-| PUT | /recipes/:id | Edit recipe |
-| DELETE | /recipes/:id | Remove recipe from recipe box|
-| GET | /recipes/batch/:id | Show requested batch notes |
-| PUT | /recipes/batch/:id | Edit past batch notes |
-| DELETE | /recipes/batch/:id | Delete past batch |
+| GET | /auth/login | Login form |
+| POST | /auth/login | Receive and authenticate user |
+| GET | /auth/signup | New user signup form |
+| POST | /auth/signup | Receive form and add new user to db |
+| GET | /profile/recipes/ | Users recipe box |
+| GET | profile/find | Recipe finder |
+| GET | /profile/new | New recipe form |
+| POST | /profile/new | Receive new recipe and add to db |
+| GET | /profile/:id | Show requested recipe |
+| POST | /profile/:id | Make new batch of recipe |
+| PUT | /profile/:id | Edit recipe |
+| DELETE | /profile/:id | Remove recipe from recipe box|
+| GET | /profile/batch/:id | Show requested batch notes |
+| PUT | /profile/batch/:id | Edit past batch notes |
+| DELETE | /profile/batch/:id | Delete past batch |
 
 ## Define table models
     * User: {
