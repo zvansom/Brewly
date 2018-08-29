@@ -24,6 +24,8 @@ router.get('/new', loggedIn, (req, res) => {
 router.post('/new', loggedIn, (req, res) => {
   const targetOg = req.body.targetOgLow + ' - ' + req.body.targetOgHigh;
   const targetFg = req.body.targetFgLow + ' - ' + req.body.targetFgHigh;
+
+  // Ingredients object constructor
   const ingredients = {
     malts: [
       {
@@ -47,7 +49,8 @@ router.post('/new', loggedIn, (req, res) => {
       }
     ],
     yeast: req.body.yeastName
-  }
+  };
+
   db.recipe.create({ 
     name: req.body.name,
     style: req.body.style,
@@ -66,11 +69,11 @@ router.post('/new', loggedIn, (req, res) => {
     res.redirect('/profile');
 });
 
-router.get('/find', (req, res) => {
+router.get('/find', loggedIn, (req, res) => {
   res.render('profile/find', {results: null});
 });
 
-router.post('/find', (req, res) => {
+router.post('/find', loggedIn, (req, res) => {
   const url = `https://api.punkapi.com/v2/beers?beer_name=${req.body.search}`;
   request(url, function(error, response, body) {
     const parsedResponse = JSON.parse(body); 

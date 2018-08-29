@@ -7,10 +7,13 @@
 </form>
 
 <% if(results) { %> 
-<h2>Search results</h2>
-<% results.forEach( result => { %>
-<div>
-  <h4><%= result.name %></h4>
-</div>
-<% }); %> 
+  <h2>Search results</h2>
+  <% results.forEach( result => { %>
+    <div>
+      <h4><%= result.name %></h4>
+      <h6><%= result.tagline %> </h6>
+      <p><%= result.description %> </p>
+      <a href="#">Add to my recipes!</a>
+    </div>
+  <% }); %> 
 <% } %> 

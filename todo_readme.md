@@ -198,7 +198,8 @@ res: {
         batch_size: integer,
         mash_temp: integer,
         fermentation_temp: integer,
-        ingredients: text (stringified JSON of all ingredients)
+        <!-- TODO: build new ingredients model -->
+        ingredientsIds: 
         brewing_notes: text,
         hop_notes: text,
         yeast_notes: text,
@@ -208,9 +209,20 @@ res: {
         tasting_notes: text,
         punk_id: integer,
         batch_number: integer,
+        <!-- TODO: add userId column to recipe model -->
+        userId: integer,
         createdAt: date,
         updatedAt: date
     }
+
+    <!-- * Ingredients: {
+        name: string,
+        qty: integer,
+        unit: string,
+        form: string,
+        time: string,
+        recipeId: integer
+    } -->
 
 ### Build/Sketch Entity-Relationship Model
     * Entity-Relationship Model at: https://www.lucidchart.com

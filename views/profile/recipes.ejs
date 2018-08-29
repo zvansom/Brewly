@@ -6,9 +6,28 @@
     <% const parsedIngredients = JSON.parse(r.ingredients) %> 
     <h5>Malts</h5>
     <% parsedIngredients.malts.forEach( m => { %>
-      <p>Malt: <%= m.maltName %> <%= m.maltQty %> <%= m.maltUnit %>  </p>
+      <div>
+        <p>Malt: <%= m.maltName %> <%= m.maltQty %> <%= m.maltUnit %>  </p>
+      </div>
     <% }) %> 
-    <% console.log(parsedIngredients) %>
+    <h5>Hops</h5>
+    <% parsedIngredients.hops.forEach( h => { %>
+      <div>
+        <p>Hop: <%= h.hopName %> <%= h.hopQty %> <%= h.hopUnit %>  </p>
+      </div>
+    <% }) %> 
+    <% if (parsedIngredients.adjuncts) { %> 
+      <h5>Adjuncts</h5>
+      <% parsedIngredients.adjuncts.forEach( a => { %>
+        <div>
+          <p>Adjunct: <%= a.adjunctName %> <%= a.adjunctQty %> oz </p>
+        </div>
+      <% }) %> 
+    <% } %>
+    <h5>Yeast</h5>
+    <div>
+      <p>Yeast: <%= parsedIngredients.yeast %></p>
+    </div>
   </div>
-
+  <a href="#">Start a new batch!</a>
 <% }); %> 
