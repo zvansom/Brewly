@@ -1,74 +1,74 @@
 <h2 class="page-header">Add a new beer recipe</h2>
 
 <form action='/profile/new' method='post'>
-  <h3>Meta Data</h3>
-  <label for='name'>Name</label>
-  <input id='name' type='text' name='name'>
+  <h3 class="form-section">Meta Data</h3>
 
-  <label for='style'>Style</label>
-  <input id='style' type='text' name='style'>
+  <div class="form-element">
+    <label for='name'>Name</label>
+    <input id='name' type='text' name='name'>
+  </div>
+  <div class="form-element">
+    <label for='style'>Style</label>
+    <input id='style' type='text' name='style'>
+  </div>
+  <div class="form-element">
+    <label for='batchSize'>Batch Size</label>
+    <input id='batchSize' type='text' name='batchSize'>
+  </div>
 
-  <label for='batchSize'>Batch Size</label>
-  <input id='batchSize' type='text' name='batchSize'>
+  <div class="form-element">
+    <label for='abv'>ABV</label>
+    <input id='abv' type='integer' name='abv'>
+  </div>
+  <div class="form-element">  
+    <label for='ibu'>IBU</label>
+    <input id='ibu' type='integer' name='ibu'>
+  </div>
+  <div class="form-element">
+    <label for='srm'>SRM</label>
+    <input id='srm' type='integer' name='srm'>
+  </div>
+  <div class="form-element">
+    <label for='ebc'>EBC</label>
+    <input id='ebc' type='integer' name='ebc'>
+  </div>
+  <div class="form-element">
+    <label for='target-og'>Target Original Gravity</label>
+    <input type='integer' name='targetOg'>
+  </div>
+  <div class="form-element">
+    <label for='target-fg'>Target Final Gravity</label>
+    <input type='integer' name='targetFg'>
+  </div>
+  <div class="form-element">
+    <label for='mash-temp'>Mash Temperature</label>
+    <input id='mash-temp' type='integer' name='mashTemp'> F
+  </div>
+  <div class="form-element">
+    <label for='ferm-temp'>Fermentation Temperature</label>
+    <input id='ferm-temp' type='integer' name='fermTemp'> F
+  </div>
 
-  <br>
-  <br>
-
-  <label for='abv'>ABV</label>
-  <input id='abv' type='integer' name='abv'>
-
-  <label for='ibu'>IBU</label>
-  <input id='ibu' type='integer' name='ibu'>
-
-  <label for='srm'>SRM</label>
-  <input id='srm' type='integer' name='srm'>
-
-  <label for='ebc'>EBC</label>
-  <input id='ebc' type='integer' name='ebc'>
-
-  <br>
-  <br>
-  
-  <label for='target-og'>Target Original Gravity</label>
-  <input id='target-og' type='integer' name='targetOgLow'> - 
-  <input type='integer' name='targetOgHigh'>
-
-  <label for='target-fg'>Target Final Gravity</label>
-  <input id='target-fg' type='integer' name='targetFgLow'> - 
-  <input type='integer' name='targetFgHigh'>
-
-  <br>
-  <br>
-
-  <label for='mash-temp'>Mash Temperature</label>
-  <input id='mash-temp' type='integer' name='mashTemp'> F
-
-  <label for='ferm-temp'>Fermentation Temperature</label>
-  <input id='ferm-temp' type='integer' name='fermTemp'> F
-
-  <br>
-  <br>
-
-  <h3>Ingredients</h3>
+  <h3 class="form-section">Ingredients</h3>
 
   <h4>Malts</h4>
-  <label for='malt-name'>Name</label>
-  <input id='malt-name' type='text' name='maltName'>
-  
-  <label for='malt-qty'>Amount</label>
-  <input id='malt-qty' type='integer' name='maltQty'>
-  
-  <label for='malt-unit'>Unit</label>
-  <select id='malt-unit' name="maltUnit">
-  <option value='lbs'>lbs</option>
-  <option value='oz'>oz</option>
-  </select>
-  
-  <label for='malt-extract'>Extract</label>
-  <input type="checkbox" id="malt-extract" name="maltExtract" value="extract" />
-  
-  <br>
-  <br>
+  <a class="button add-ingredient-button">Add Malt</a>
+  <div class="form-element ingredient-wrapper"></div>
+    <label for='malt-name'>Name</label>
+    <input id='malt-name' type='text' name='maltName'>
+    
+    <label for='malt-qty'>Amount</label>
+    <input id='malt-qty' type='integer' name='maltQty'>
+    
+    <label for='malt-unit'>Unit</label>
+    <select id='malt-unit' name="maltUnit">
+      <option value='lbs'>lbs</option>
+      <option value='oz'>oz</option>
+    </select>
+    
+    <label for='malt-extract'>Extract</label>
+    <input type="checkbox" id="malt-extract" name="maltExtract" value="extract" />
+  </div>
   
   <h4>Hops</h4>
   <label for='hop-name'>Name</label>
@@ -109,3 +109,5 @@
 
   <input id='submit-new' type='submit' value='submit'>
 </form>
+
+<script src="/js/input-expander.js"></script>

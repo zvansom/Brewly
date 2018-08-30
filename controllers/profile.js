@@ -44,7 +44,7 @@ router.post('/add', loggedIn, (req, res) => {
   // res.redirect('/profile/recipes');
 });
 
-router.get('/new', loggedIn, (req, res) => {
+router.get('/new', (req, res) => {
   res.render('profile/new');
 });
 

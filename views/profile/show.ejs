@@ -19,13 +19,13 @@ Fermentation Temperature: <%= recipe.fermTemp %>
     <h5>Malts</h5>
     <% parsedIngredients.malt.forEach( m => { %>
       <div>
-        <p>Malt: <%= m.maltName %> <%= m.maltQty %> <%= m.maltUnit %>  </p>
+        <p>Malt: <%= m.name %> <%= m.amount.value %> <%= m.amount.unit %>  </p>
       </div>
     <% }) %> 
     <h5>Hops</h5>
     <% parsedIngredients.hops.forEach( h => { %>
       <div>
-        <p>Hop: <%= h.hopName %> <%= h.hopQty %> <%= h.hopUnit %>  </p>
+        <p>Hop: <%= h.name %> <%= h.amount.value %> <%= h.amount.unit %> Include at: <%= h.add %>  </p>
       </div>
     <% }) %> 
     <% if (parsedIngredients.adjuncts) { %> 
