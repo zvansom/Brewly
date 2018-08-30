@@ -1,15 +1,27 @@
-<h2 class="center-align">Claim your free Brewly account!</h2>
+<h2 class="page-header">Claim your free Brewly account!</h2>
 
 <form action="/auth/signup" method="post">
-  <input id="first_name" type="text" name="firstname">
-  <label for="first_name">First Name</label>
-  <input id="last_name" type="text" name="lastname">
-  <label for="last_name">Last Name</label>
-  <input id="email" type="email" name="email">
-  <label for="email">Email</label>
-  <input id="password" type="password" name="password">
-  <label for="password">Password</label>
-  <input id="confirm-password" type="password" name="confirm_password">
-  <label for="confirm-password">Confirm Password</label>
-  <input id="confirm-password" type="submit" value="submit" >
+  <div class="form-element">
+    <label for="first_name">First Name</label>
+    <input id="first_name" type="text" name="firstname">
+  </div>
+  <div class="form-element">
+    <label for="last_name">Last Name</label>
+    <input id="last_name" type="text" name="lastname">
+  </div>
+  <div class="form-element">
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email">
+  </div>
+  <div class="form-element">
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password">
+  </div>
+  <div class="form-element">
+    <label for="confirm-password">Confirm Password</label>
+    <input id="confirm-password" type="password" name="confirm_password">
+  </div>
+  <div class="form-element">
+    <input class="button" id="confirm-password" type="submit" value="submit" >
+  </div>
 </form>

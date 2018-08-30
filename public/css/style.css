@@ -1,3 +1,75 @@
-body {
-  
+:root {
+  --black: #272727;
+}
+
+html {
+  box-sizing: border-box;
+  /* A system font stack so things load nice and quick! */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 900;
+  font-size: 10px;
+  color: var(--black);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
+}
+
+.navbar {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  border-bottom: 4px solid black;
+  background: #79e589;
+}
+
+.navbar-logo {
+  align-self: center;
+  justify-self: center;
+}
+
+.navbar-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item a {
+  background: green;
+  font-size: 2em;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  text-decoration: none;
+}
+
+.container {
+  margin: 20px auto;
+  display: grid;
+  width: 75%;
+}
+
+h1 {
+  font-size: 4em;
+  justify-self: center;
+}
+
+form {
+  display: grid;
+  justify-content: center;
+  font-size: 1.4em;
+}
+
+.page-header {
+  font-size: 3em;
+  justify-self: center;
+}
+
+.button {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.form-element {
+  margin: 10px 0;
 }

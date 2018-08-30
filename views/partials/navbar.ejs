@@ -1,17 +1,15 @@
-<nav>
-  <div>
-    <a href="/">Brewly</a>
-    <ul>
-      <% if (currentUser) { %> 
-      <li><a href="/profile">Weclome back, <%= currentUser.firstname %></a></li>
-      <li><a href="/profile/recipes">My Recipes</a></li>
-      <li><a href="/profile/find">Find a Recipe</a></li>
-      <li><a href="/profile/new">Add a Recipe</a></li>
-      <li><a href="/auth/logout">Logout</a></li>
-      <% } else { %> 
-      <li><a href="/auth/login">Login</a></li>
-      <li><a href="/auth/signup">Signup</a></li>
-      <% } %> 
-    </ul>
-  </div>
+<nav class="navbar">
+  <a class="navbar-logo" href="/">Brewly</a>
+  <ul class="navbar-items">
+    <% if (currentUser) { %> 
+      <li class="nav-item"><a href="/profile">Weclome back, <%= currentUser.firstname %></a></li>
+      <li class="nav-item"><a href="/profile/recipes">My Recipes</a></li>
+      <li class="nav-item"><a href="/profile/find">Find a Recipe</a></li>
+      <li class="nav-item"><a href="/profile/new">Add a Recipe</a></li>
+      <li class="nav-item"><a href="/auth/logout">Logout</a></li>
+    <% } else { %> 
+      <li class="nav-item"><a href="/auth/login">Login</a></li>
+      <li class="nav-item"><a href="/auth/signup">Signup</a></li>
+    <% } %> 
+  </ul>
 </nav>

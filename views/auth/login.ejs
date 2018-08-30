@@ -1,9 +1,15 @@
-<h2>Log in to your account</h2>
+<h2 class="page-header">Log in to your account</h2>
 
 <form action="/auth/login" method="post">
-  <input id="email" type="email" name="email">
-  <label for="email">Email</label>
-  <input id="password" type="password" name="password">
-  <label for="password">Password</label>
-  <input id="confirm-password" type="submit" value="submit" >
+  <div class="form-element">
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email">
+  </div>
+  <div class="form-element">
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password">
+  </div>
+  <div>
+    <input class="button" id="confirm-password" type="submit" value="submit" >
+  </div>
 </form>
