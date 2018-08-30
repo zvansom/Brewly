@@ -1,8 +1,8 @@
-<h2>Find a new recipe</h2>
+<h2 class="page-header">Find a new recipe</h2>
 
 <form id="search-form" action="/profile/find" method="post">
   <label for="search">Search for a new beer!</label>
-  <input type="text" name="search" id="search" >
+  <input type="text" name="search" id="search" required>
   <input type="submit" value="search">
 </form>
 
@@ -13,7 +13,10 @@
       <h4><%= result.name %></h4>
       <h6><%= result.tagline %> </h6>
       <p><%= result.description %> </p>
-      <a href="#">Add to my recipes!</a>
+      <form action="/profile/add" method="post">
+        <input hidden name="id" value="<%= result.id %>">
+        <input type="submit" value="Add to my favorites">
+      </form>
     </div>
   <% }); %> 
 <% } %> 

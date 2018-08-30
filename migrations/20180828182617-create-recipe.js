@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       batchSize: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       abv: {
         type: Sequelize.FLOAT
@@ -43,6 +43,9 @@ module.exports = {
       },
       ingredients: {
         type: Sequelize.TEXT
+      },
+      punkId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

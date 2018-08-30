@@ -7,6 +7,8 @@ const db = require("../models");
 
 const loggedIn = require('../middleware/loggedIn');
 
+const punkApiUrl = 'https://api.punkapi.com/v2/beers/'
+
 router.get('/', loggedIn, (req, res) => {
   res.render('profile/index');
 });
@@ -17,6 +19,30 @@ router.get('/recipes', loggedIn, (req, res) => {
   .catch(err => res.send(err));
 });
 
+router.post('/add', loggedIn, (req, res) => {
+  request(punkApiUrl + req.body.id, function(error, response, body) {
+    const parsedResponse = JSON.parse(body); 
+    db.recipe.findOrCreate({ where: { punkId: parsedResponse[0].id },
+      defaults: {
+        name: parsedResponse[0].name,
+        punkId: parsedResponse[0].id,
+        abv: parsedResponse[0].abv,
+        ibu: parsedResponse[0].ibu,
+        targetFg: parsedResponse[0].targetFg,
+        targetOg: parsedResponse[0].targetOg,
+        ebc: parsedResponse[0].ebc,
+        srm: parsedResponse[0].srm,
+        batchSize: parsedResponse[0].volume.value,
+        ingredients: JSON.stringify(parsedResponse[0].ingredients)
+    } })
+    .spread( (recipe, wasCreated) => {
+      if(wasCreated) {
+        res.send('🤞');
+      }
+    })
+  });
+  // res.redirect('/profile/recipes');
+});
 
 router.get('/new', loggedIn, (req, res) => {
   res.render('profile/new');
@@ -70,7 +96,7 @@ router.post('/new', loggedIn, (req, res) => {
     res.redirect('/profile');
 });
 
-router.get('/find', (req, res) => {
+router.get('/find', loggedIn, (req, res) => {
   res.render('profile/find', {results: null});
 });
 

@@ -17,7 +17,7 @@ Fermentation Temperature: <%= recipe.fermTemp %>
 <h4>Ingredients</h4>
 <% const parsedIngredients = JSON.parse(recipe.ingredients) %> 
     <h5>Malts</h5>
-    <% parsedIngredients.malts.forEach( m => { %>
+    <% parsedIngredients.malt.forEach( m => { %>
       <div>
         <p>Malt: <%= m.maltName %> <%= m.maltQty %> <%= m.maltUnit %>  </p>
       </div>

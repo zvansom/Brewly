@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     targetFg: DataTypes.STRING,
     mashTemp: DataTypes.INTEGER,
     fermTemp: DataTypes.INTEGER,
-    ingredients: DataTypes.TEXT
+    ingredients: DataTypes.TEXT,
+    punkId: DataTypes.INTEGER
   }, {});
   recipe.associate = function(models) {
     // associations can be defined here
