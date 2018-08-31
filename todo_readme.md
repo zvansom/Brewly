@@ -158,16 +158,16 @@ res: {
 ## Define routes
 | METHOD | PATH | PURPOSE |
 | ------- | -------------------------- | -----------------------------------|
-| GET | / | Home page |
-| GET | /auth/login | Login form |
-| POST | /auth/login | Receive and authenticate user |
-| GET | /auth/signup | New user signup form |
-| POST | /auth/signup | Receive form and add new user to db |
-| GET | /profile/recipes/ | Users recipe box |
-| GET | profile/find | Recipe finder |
-| GET | /profile/new | New recipe form |
-| POST | /profile/new | Receive new recipe and add to db |
-| GET | /profile/:id | Show requested recipe |
+✅| GET | / | Home page |
+✅| GET | /auth/login | Login form |
+✅| POST | /auth/login | Receive and authenticate user |
+✅| GET | /auth/signup | New user signup form |
+✅| POST | /auth/signup | Receive form and add new user to db |
+✅| GET | /profile/recipes/ | Users recipe box |
+✅| GET | profile/find | Recipe finder |
+✅| GET | /profile/new | New recipe form |
+✅| POST | /profile/new | Receive new recipe and add to db |
+✅| GET | /profile/:id | Show requested recipe |
 | POST | /profile/:id | Make new batch of recipe |
 | PUT | /profile/:id | Edit recipe |
 | DELETE | /profile/:id | Remove recipe from recipe box|

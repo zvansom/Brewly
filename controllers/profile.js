@@ -7,7 +7,6 @@ const db = require("../models");
 
 const loggedIn = require('../middleware/loggedIn');
 
-const punkApiUrl = 'https://api.punkapi.com/v2/beers/'
 const punkApiSearch = "https://api.punkapi.com/v2/beers?beer_name=";
 
 router.get('/', loggedIn, (req, res) => {
