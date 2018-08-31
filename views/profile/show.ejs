@@ -1,6 +1,8 @@
 <h2><%= recipe.name %> </h2>
 <h3><%= recipe.style %> </h3>
 
+<a href="/profile/recipes/<%= recipe.id %>" class="button" id="delete-recipe">DELETE RECIPE</a>
+
 <h4>Meta data</h4>
 Batch Size: <%= recipe.batchSize %> <br>
 ABV: <%= recipe.abv %> <br>
@@ -41,3 +43,20 @@ Fermentation Temperature: <%= recipe.fermTemp %>
       <p>Yeast: <%= parsedIngredients.yeast %></p>
     </div>
   </div>
+
+<script>
+  $('#delete-recipe').click(function(e) {
+    e.preventDefault();
+    console.log('clicked.  Time to make this go away.');
+    // console.log($(this).attr('href'));
+    $.ajax({
+      method: "DELETE",
+      url: $(this).attr('href')
+    }).done( data => {
+      console.log('Bingo!', data);
+      window.location = '/profile/recipes';
+    }).fail( err => {
+      console.log("Err:", err)
+    });
+  });
+</script>

@@ -118,8 +118,13 @@ router.post('/find', loggedIn, (req, res) => {
 
 router.get('/recipes/:id', loggedIn, (req, res) => {
   db.recipe.findOne({ where: { id: req.params.id } })
-    .then(recipe => res.render('profile/show', { recipe }))
-    .catch(err => res.send(err));
+  .then(recipe => res.render('profile/show', { recipe }))
+  .catch(err => res.send(err));
+});
+
+router.delete('/recipes/:id', loggedIn, (req, res) => {
+  db.recipe.destroy({ where: { id: req.params.id } })
+  res.send(200);
 });
 
 module.exports = router;
