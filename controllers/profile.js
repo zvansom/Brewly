@@ -8,7 +8,7 @@ const db = require("../models");
 const loggedIn = require('../middleware/loggedIn');
 
 const punkApiUrl = 'https://api.punkapi.com/v2/beers/'
-const punkApiSearch = 'https://api.punkapi.com/v2/beers?'
+const punkApiSearch = "https://api.punkapi.com/v2/beers?beer_name=";
 
 router.get('/', loggedIn, (req, res) => {
   res.render('profile/index');
@@ -95,7 +95,7 @@ router.get('/find', loggedIn, (req, res) => {
 });
 
 router.post('/find', loggedIn, (req, res) => {
-  const url = `https://api.punkapi.com/v2/beers?${req.body.search}`;
+  const url = punkApiSearch + req.body.search;
   request(url, function(error, response, body) {
     const parsedResponse = JSON.parse(body); 
     db.recipe.findAll({

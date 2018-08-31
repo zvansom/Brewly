@@ -18,17 +18,17 @@
       <form class="add-favorite" action="/profile/add" method="post">
         <input hidden name="punkId" value="<%= result.id %>">
         <input hidden name="name" value="<%= result.name %>">
-        <input hidden name="batchSize" value="<%= result.volume.value %>" >
+        <input hidden name="batchSize" value="<%= Math.floor(result.volume.value) %>" >
         <input hidden name="mashTemp" value="<%= result.method.mash_temp[0].temp.value %>">
         <input hidden name="fermTemp" value="<%= result.method.fermentation.temp.value %>">
-        <input hidden name="abv" value="<%= result.abv %>">
+        <input hidden name="abv" value="<%= Math.floor(result.abv) %>">
         <input hidden name="ibu" value="<%= Math.floor(result.ibu) %>">
-        <input hidden name="ebc" value="<%= result.ebc %>">
-        <input hidden name="srm" value="<%= result.srm %>">
+        <input hidden name="ebc" value="<%= Math.floor(result.ebc) %>">
+        <input hidden name="srm" value="<%= Math.floor(result.srm) %>">
         <input hidden name="targetOg" value="<%= result.target_og %>">
         <input hidden name="targetFg" value="<%= result.target_fg %>">
         <input hidden name="ingredients" value="<%= JSON.stringify(result.ingredients) %>">
-        <input type="submit" value="Add to my favorites">
+        <input class="favSubmit" type="submit" value="Add to my favorites">
       </form>
       <% } else { %>
         <p>🍺 Favorited!</p>
@@ -41,17 +41,19 @@
   $(document).ready(function() {
     $('.add-favorite').submit(function(e) {
       e.preventDefault();
-      console.log($(this));
+      const favoritedBeer = $(this);
+      console.log(favoritedBeer);
       $.ajax({
         method: "post",
         url: $(this).attr('action'),
         data: $(this).serialize()
       }).done(function() {
-        console.log('success');
+        favoritedBeer.find('.favSubmit').hide();
+        favoritedBeer.append('<p>🍺 Favorited!</p>');
       }).fail(function(err) {
         console.log(err);
       });
-
+      
     });
   });
 </script>
