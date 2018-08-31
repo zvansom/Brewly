@@ -12,11 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     targetFg: DataTypes.STRING,
     mashTemp: DataTypes.INTEGER,
     fermTemp: DataTypes.INTEGER,
-    ingredients: DataTypes.TEXT,
-    punkId: DataTypes.INTEGER
+    punkId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
+    ingredients: DataTypes.TEXT
   }, {});
   recipe.associate = function(models) {
     // associations can be defined here
+    models.recipe.belongsTo(models.user);
   };
   return recipe;
 };

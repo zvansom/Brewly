@@ -1,6 +1,7 @@
 <h2 class="page-header">Find a new recipe</h2>
 
 <form id="search-form" action="/profile/find" method="post">
+  <input hidden type="text" name="userId" value="<%= currentUser.id %>" >
   <label for="search">Search for a new beer!</label>
   <input type="text" name="search" id="search" required>
   <input type="submit" value="search">
@@ -13,10 +14,44 @@
       <h4><%= result.name %></h4>
       <h6><%= result.tagline %> </h6>
       <p><%= result.description %> </p>
-      <form action="/profile/add" method="post">
-        <input hidden name="id" value="<%= result.id %>">
+      <% if(ids.indexOf(result.id) === -1 ) { %>
+      <form class="add-favorite" action="/profile/add" method="post">
+        <input hidden name="punkId" value="<%= result.id %>">
+        <input hidden name="name" value="<%= result.name %>">
+        <input hidden name="batchSize" value="<%= result.volume.value %>" >
+        <input hidden name="mashTemp" value="<%= result.method.mash_temp[0].temp.value %>">
+        <input hidden name="fermTemp" value="<%= result.method.fermentation.temp.value %>">
+        <input hidden name="abv" value="<%= result.abv %>">
+        <input hidden name="ibu" value="<%= Math.floor(result.ibu) %>">
+        <input hidden name="ebc" value="<%= result.ebc %>">
+        <input hidden name="srm" value="<%= result.srm %>">
+        <input hidden name="targetOg" value="<%= result.target_og %>">
+        <input hidden name="targetFg" value="<%= result.target_fg %>">
+        <input hidden name="ingredients" value="<%= JSON.stringify(result.ingredients) %>">
         <input type="submit" value="Add to my favorites">
       </form>
+      <% } else { %>
+        <p>🍺 Favorited!</p>
+      <% } %>
     </div>
   <% }); %> 
 <% } %> 
+
+<script>
+  $(document).ready(function() {
+    $('.add-favorite').submit(function(e) {
+      e.preventDefault();
+      console.log($(this));
+      $.ajax({
+        method: "post",
+        url: $(this).attr('action'),
+        data: $(this).serialize()
+      }).done(function() {
+        console.log('success');
+      }).fail(function(err) {
+        console.log(err);
+      });
+
+    });
+  });
+</script>
