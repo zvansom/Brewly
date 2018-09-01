@@ -1,147 +1,196 @@
 <h2 class="page-header">Add a new beer recipe</h2>
 
-<form action='/profile/recipes/new' method='post'>
-  <input hidden name="userId" value="<%= currentUser.id %>" > 
-  <h3 class="form-section">Meta Data</h3>
+<form class="form" action='/profile/recipes/new' method='post'>
+  <%# META-DATA %> 
+  <div class="form-section">
+    <h3 class="form-section-header">Meta Data</h3>
+    <div class="form-element">
+      <label for='name'>Name</label>
+      <input id='name' type='text' name='name'>
+    </div>
+    <div class="form-element">
+      <label for='style'>Style</label>
+      <input id='style' type='text' name='style'>
+    </div>
+    <div class="form-element">
+      <label for='batchSize'>Batch Size</label>
+      <input id='batchSize' type='text' name='batchSize'>
+    </div>
+    <div class="form-element">
+      <label for='abv'>ABV</label>
+      <input id='abv' type='integer' name='abv'>
+    </div>
+    <div class="form-element">  
+      <label for='ibu'>IBU</label>
+      <input id='ibu' type='integer' name='ibu'>
+    </div>
+    <div class="form-element">
+      <label for='srm'>SRM</label>
+      <input id='srm' type='integer' name='srm'>
+    </div>
+    <div class="form-element">
+      <label for='ebc'>EBC</label>
+      <input id='ebc' type='integer' name='ebc'>
+    </div>
+    <div class="form-element">
+      <label for='target-og'>Target Original Gravity</label>
+      <input type='integer' name='targetOg'>
+    </div>
+    <div class="form-element">
+      <label for='target-fg'>Target Final Gravity</label>
+      <input type='integer' name='targetFg'>
+    </div>
+    <div class="form-element">
+      <label for='mash-temp'>Mash Temperature</label>
+      <input id='mash-temp' type='integer' name='mashTemp'>
+    </div>
+    <div class="form-element">
+      <label for='ferm-temp'>Fermentation Temperature</label>
+      <input id='ferm-temp' type='integer' name='fermTemp'>
+    </div>
+  </div>
 
-  <div class="form-element">
-    <label for='name'>Name</label>
-    <input id='name' type='text' name='name'>
-  </div>
-  <div class="form-element">
-    <label for='style'>Style</label>
-    <input id='style' type='text' name='style'>
-  </div>
-  <div class="form-element">
-    <label for='batchSize'>Batch Size</label>
-    <input id='batchSize' type='text' name='batchSize'>
+  <%# INGREDIENTS %> 
+  <%# MALTS %> 
+  <div class="form-section">
+    <h3 class="form-section-header">Ingredients</h3>    
+    <h4 class="form-subheader">Malts</h4>
+    <div class="form-element">
+      <label for='malt-name'>Name</label>
+      <input id='malt-name' type='text' name='maltName'>
+    </div>
+    <div class="form-element">
+      <label for='malt-qty'>Amount</label>
+      <input id='malt-qty' type='integer' name='maltQty'>
+    </div>
+    <div class="form-element">
+      <label for='malt-unit'>Unit</label>
+      <select id='malt-unit' name="maltUnit">
+        <option value='lbs'>lbs</option>
+        <option value='oz'>oz</option>
+      </select>
+    </div>
+    <div class="form-element">
+      <label for='malt-extract'>Extract</label>
+      <select id='malt-form' name="maltForm">
+        <option value='grain'>Grain</option>
+        <option value='extract'>Extract</option>
+      </select>
+    </div>
+    <div class="form-element" id="malt-form-control">
+      <a class="button add-button" id="malt">Add Another Malt</a>
+    </div>
+
+    <%# This div displays the ingredients on button press. %>
+    <div id="archive-malt" class="ingredient-archive"></div>
   </div>
 
-  <div class="form-element">
-    <label for='abv'>ABV</label>
-    <input id='abv' type='integer' name='abv'>
-  </div>
-  <div class="form-element">  
-    <label for='ibu'>IBU</label>
-    <input id='ibu' type='integer' name='ibu'>
-  </div>
-  <div class="form-element">
-    <label for='srm'>SRM</label>
-    <input id='srm' type='integer' name='srm'>
-  </div>
-  <div class="form-element">
-    <label for='ebc'>EBC</label>
-    <input id='ebc' type='integer' name='ebc'>
-  </div>
-  <div class="form-element">
-    <label for='target-og'>Target Original Gravity</label>
-    <input type='integer' name='targetOg'>
-  </div>
-  <div class="form-element">
-    <label for='target-fg'>Target Final Gravity</label>
-    <input type='integer' name='targetFg'>
-  </div>
-  <div class="form-element">
-    <label for='mash-temp'>Mash Temperature</label>
-    <input id='mash-temp' type='integer' name='mashTemp'>
-  </div>
-  <div class="form-element">
-    <label for='ferm-temp'>Fermentation Temperature</label>
-    <input id='ferm-temp' type='integer' name='fermTemp'>
+  <%# HOPS %> 
+  <div class="form-section">
+    <h4 class="form-subheader">Hops</h4>
+    <div class="form-element">
+      <label for='hop-name'>Name</label>
+      <input id='hop-name' type='text' name='hopName'>
+    </div>
+    <div class="form-element">
+      <label for='hop-qty'>Amount</label>
+      <input id='hop-qty' type='integer' name='hopQty'>
+    </div>
+    <div class="form-element">
+      <label for='hop-time'>Time</label>
+      <select id='hop-time' name='hopTime'>
+        <option value='90'>90 mins</option>
+        <option value='75'>75 mins</option>
+        <option value='60'>60 mins</option>
+        <option value='45'>45 mins</option>
+        <option value='30'>30 mins</option>
+        <option value='15'>15 mins</option>
+        <option value='15'>Dry</option>
+      </select>
+    </div>
+    <div class="form-element">
+      <label for='hop-use'>Purpose</label>
+      <select id='hop-use' name='hopUse'>
+        <option value='Aroma'>Aroma</option>
+        <option value='Flavoring'>Flavoring</option>
+      </select>
+    </div>
+    <div class="form-element" id="hop-form-control">
+      <a class="button add-button" id="hop">Add Another Hop</a>
+    </div>
+
+    <%# This div displays the ingredients on button press. %>
+    <div id="archive-hop" class="ingredient-archive"></div>
   </div>
 
-  <h3 class="form-section">Ingredients</h3>
+  <%# ADJUNCTS %> 
+  <div class="form-section">
+    <h4 class="form-subheader">Adjuncts</h4>
+    <div class="form-element">
+      <label for='adjunct-name'>Name</label>
+      <input id='adjunct-name' type='text' name='adjunctName'>
+    </div>
+    <div class="form-element">
+      <label for='adjunct-qty'>Amount</label>
+      <input id='adjunct-qty' type='integer' name='adjunctQty'>
+    </div>
+    <div class="form-element" id="adjunct-form-control">
+      <a class="button add-button" id="adjunct">Add Another Adjunct</a>
+    </div>
 
-  <h4>Malts</h4>
-  <div class="form-element ingredient-wrapper"></div>
-  <label for='malt-name'>Name</label>
-  <input id='malt-name' type='text' name='maltName'>
-  
-  <label for='malt-qty'>Amount</label>
-  <input id='malt-qty' type='integer' name='maltQty'>
-  
-  <label for='malt-unit'>Unit</label>
-  <select id='malt-unit' name="maltUnit">
-  <option value='lbs'>lbs</option>
-  <option value='oz'>oz</option>
-  </select>
-  
-  <label for='malt-extract'>Extract</label>
-  <input type="checkbox" id="malt-extract" name="maltExtract" value="extract" />
-  <a class="button" id="add-malt">Add Another Malt</a>
-  <div id="archive-malt"></div>
+    <%# This div displays the ingredients on button press. %>
+    <div id="archive-adjunct" class="ingredient-archive"></div>
   </div>
-  
-  <h4>Hops</h4>
-  <label for='hop-name'>Name</label>
-  <input id='hop-name' type='text' name='hopName'>
 
-  <label for='hop-qty'>Amount (oz)</label>
-  <input id='hop-qty' type='integer' name='hopQty'>
-  
-  <label for='adjunct-time'>Time</label>
-  <select id='adjunct-time' name='hopTime'>
-    <option value='90'>90 mins</option>
-    <option value='75'>75 mins</option>
-    <option value='60'>60 mins</option>
-    <option value='45'>45 mins</option>
-    <option value='30'>30 mins</option>
-    <option value='15'>15 mins</option>
-  </select>
+  <%# YEAST %> 
+  <div class="form-section">
+    <h4 class="form-subheader">Yeast</h4>
+    <div class="form-element">
+      <label for='yeast-name'>Name</label>
+      <input id='yeast-name' type='text' name='yeastName'>
+    </div>
+  </div>
 
-  <br>
-  <br>
-
-  <h4>Adjuncts</h4>
-  <label for='adjuncts-name'>Name</label>
-  <input id='adjuncts-name' type='text' name='adjunctName'>
-
-  <label for='adjunct-qty'>Amount (oz)</label>
-  <input id='adjunct-qty' type='integer' name='adjunctQty'>
-  
-  <br>
-  <br>
-
-  <h4>Yeast</h4>
-  <label for='yeast-name'>Name</label>
-  <input id='yeast-name' type='text' name='yeastName'>
-
-  <br>
-  <br>
-
-  <input id='submit-new' type='submit' value='submit'>
+  <div class="form-section">
+    <input class="button" id='submit-new' type='submit' value='submit'>
+  </div>
 </form>
 
 <script>
 $(document).ready(function() {
-  $('#add-malt').click(function(e) {
+  const newMalt = '<'
+
+  $('.add-button').click(function(e) {
     e.preventDefault();
-    const maltInput = $('#malt-name').val();
-    const maltQty = $('#malt-qty').val();
-    const maltUnit = $('#malt-unit').val();
-    if(!maltInput && !maltQty) { console.log('You must add a malt name and qty first.')}
-    else {
-      const archiveMalt = $(`<p>${maltInput} ${maltQty} ${maltUnit}</p>`);
-      $('#archive-malt').append(archiveMalt);
-      $('#malt-name').val('');
-      $('#malt-qty').val('');
-      console.log($('#malt-unit').val());
-    }
+    const type = $(this).attr('id');
+    const name = $(`#${type}-name`).val();
+    const qty = $(`#${type}-qty`).val();
+    if(!name) { 
+      console.log('no name!');
+      return; }
+    if(!qty) { 
+      console.log('no qty!');
+      return; }
+    const unit = $(`#${type}-unit`).val() || '';
+    const form = $(`#${type}-form`).val() || '';
+    const time = $(`#${type}-time`).val() || '';
+    const use = $(`#${type}-use`).val() || '';
+
+    const newItem = `
+      <div class="ingredient">
+        <p>${name} ${qty} ${unit} ${form} ${time} ${use}</p>
+        <a class="button remove">Remove Ingredient</a>
+      </div> `
+
+    $(`#archive-${type}`).append(newItem);
+    $(`#${type}-name`).val('');
+    $(`#${type}-qty`).val('');
   });
 
-    $('#add-malt').click(function(e) {
+  $('.ingredient-archive').on('click', 'a', function(e) {
     e.preventDefault();
-    const maltInput = $('#malt-name').val();
-    const maltQty = $('#malt-qty').val();
-    const maltUnit = $('#malt-unit').val();
-    if(!maltInput && !maltQty) { console.log('You must add a malt name and qty first.')}
-    else {
-      const archiveMalt = $(`<p>${maltInput} ${maltQty} ${maltUnit}</p>`);
-      $('#archive-malt').append(archiveMalt);
-      $('#malt-name').val('');
-      $('#malt-qty').val('');
-      console.log($('#malt-unit').val());
-    }
+    $(this).parent().remove();
   });
 });
+
 </script>
