@@ -1,7 +1,7 @@
 :root {
   --black: #272727;
-  --green: rgb(155, 114, 19, 0.3);
-  --white: #fdd862
+  --dark-yellow: rgb(155, 114, 19, 0.3);
+  --light-yellow: #fdd862
 }
 
 html {
@@ -40,7 +40,7 @@ a:visited {
 }
 
 a:hover {
-  color: var(--white);
+  color: var(--light-yellow);
   text-decoration: underline;
 }
 
@@ -131,7 +131,7 @@ input {
 }
 
 .button {
-  background: var(--green);
+  background: var(--dark-yellow);
   padding: 10px;
   border: 1px solid var(--black);
   border-radius: 5px;
@@ -162,13 +162,13 @@ input {
   grid-auto-flow: column;
   align-items: center;
   grid-gap: 10px;
-  background: var(--green);
+  background: var(--dark-yellow);
   color: var(--black);
 }
 
 .navbar-item:hover,
 .navbar>a:hover {
-  color: var(--white) !important;
+  color: var(--light-yellow) !important;
   text-decoration: underline;
 }
 
