@@ -24,8 +24,7 @@ router.post('/add', loggedIn, (req, res) => {
     defaults: req.body 
   })
   .spread( (recipe, wasCreated) => {
-    console.log('SUCCESS');
-    res.send('🤞');
+    res.status(200);
   })
   .catch((err) => {
     console.log('ERR', err);

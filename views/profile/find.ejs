@@ -37,23 +37,4 @@
   </div>
 <% } %> 
 
-<script>
-  $(document).ready(function() {
-    $('.add-favorite').submit(function(e) {
-      e.preventDefault();
-      const favoritedBeer = $(this);
-      console.log(favoritedBeer);
-      $.ajax({
-        method: "post",
-        url: $(this).attr('action'),
-        data: $(this).serialize()
-      }).done(function() {
-        favoritedBeer.find('.favSubmit').hide();
-        favoritedBeer.append('<p>🍺 Favorited!</p>');
-      }).fail(function(err) {
-        console.log(err);
-      });
-      
-    });
-  });
-</script>
+<script src="./js/find.js"></script>
