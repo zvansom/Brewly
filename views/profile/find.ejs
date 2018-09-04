@@ -1,10 +1,10 @@
 <h2 class="page-header">Find a new recipe</h2>
-
+<div class="display-card">
 <form id="search-form" action="/profile/find" method="post">
   <input hidden type="text" name="userId" value="<%= currentUser.id %>" >
   <label for="search">Search for a new beer!</label>
   <input type="text" name="search" id="search" required>
-  <input type="submit" value="search">
+  <input class="button button-small" type="submit" value="search">
 </form>
 
 <% if(results) { %> 
@@ -12,7 +12,6 @@
   <% results.forEach( result => { %>
     <div>
       <h4><%= result.name %></h4>
-      <h6><%= result.tagline %> </h6>
       <p><%= result.description %> </p>
       <% if(ids.indexOf(result.id) === -1 ) { %>
       <form class="add-favorite" action="/profile/add" method="post">
@@ -28,13 +27,14 @@
         <input hidden name="targetOg" value="<%= result.target_og %>">
         <input hidden name="targetFg" value="<%= result.target_fg %>">
         <input hidden name="ingredients" value="<%= JSON.stringify(result.ingredients) %>">
-        <input class="favSubmit" type="submit" value="Add to my favorites">
+        <button class="button" type="submit">Add to my favorites"></button>
       </form>
       <% } else { %>
         <p>🍺 Favorited!</p>
       <% } %>
     </div>
   <% }); %> 
+  </div>
 <% } %> 
 
 <script>

@@ -1,84 +1,221 @@
 :root {
   --black: #272727;
+  --green: rgb(155, 114, 19, 0.3);
+  --white: #fdd862
 }
 
 html {
   box-sizing: border-box;
-  /* A system font stack so things load nice and quick! */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: 'Open Sans', sans-serif;
+  /* font-family: 'Merriweather', serif; */
   font-weight: 900;
   font-size: 10px;
   color: var(--black);
   text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
+  background: url('https://upload.wikimedia.org/wikipedia/commons/a/a3/Wall_Food_10489_%2815825300172%29.jpg');
+  background-attachment: fixed;
 }
 
-.navbar {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  border-bottom: 4px solid black;
-  background: #79e589;
-}
-
-.navbar-logo {
-  align-self: center;
-  justify-self: center;
-}
-
-.navbar-items {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  list-style-type: none;
+body {
   margin: 0;
-  padding: 0;
 }
 
-.nav-item a {
-  background: green;
-  font-size: 2em;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  margin: 0;
+}
+
+a {
   text-decoration: none;
+  color: var(--black);
 }
 
-.container {
-  margin: 20px auto;
-  display: grid;
-  width: 75%;
+a:visited {
+  color: var(--black);
+}
+
+a:hover {
+  color: var(--white);
+  text-decoration: underline;
 }
 
 h1 {
-  font-size: 4em;
-  justify-self: center;
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 35px;
+  margin-top: 20px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 25px;
+}
+
+p {
+  font-size: 16px;
+  margin: 0;
 }
 
 form {
   display: grid;
-  justify-content: center;
-  font-size: 1.4em;
-  border: 2px solid var(--black);
-  grid-template-columns: 1fr 1fr;
+  background: rgb(255, 255, 255, 0.8);
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px 50px;
+  font-size: 20px;
+  grid-gap: 5px;
 }
 
-.page-header {
-  font-size: 3em;
-  justify-self: center;
+input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--black);
+  font-size: 20px;
+  margin: 5px;
 }
 
-.button {
-  font-size: 1.2em;
-  margin: 10px 0;
-  border: 1px solid var(--black);
-  border-radius: 5px 5px 5px 5px;
-}
-
-.form-element {
-  margin: 10px 0;
+.ingredient-header {
+  grid-column: 1/-1;
 }
 
 .form-section {
-  grid-column: span 2;
+  margin-bottom: 20px;
+}
+
+.form-element {
+  margin: 5px;
+}
+
+.form-element:last-of-type {
+  align-self: end;
+  margin-bottom: 40px;
+}
+
+.logo {
+  font-family: 'Grand Hotel', cursive;
+  font-size: 2em;
+}
+
+.show {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  
+}
+
+.show>h2 {
+  grid-column: 1 / -1;
   justify-self: center;
+}
+
+.container {
+  margin: 30px 50px;
+  display: grid;
+  grid-gap: 20px;
+  justify-items: center;
+}
+
+.show-meta {
+  grid-column: 1/-1;
+}
+
+.button {
+  background: var(--green);
+  padding: 10px;
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.button-large {
+  width: 400px;
+  padding: 10px 40px;
+  font-size: 30px;
+}
+
+.button-small {
+  font-size: 20px;
+  padding: 0, 10px;
+}
+
+.button:hover {
+  text-decoration: underline;
+}
+
+.navbar, 
+.navbar>a:visited {
+  border-bottom: 5px solid var(--black);
+  /* grid-column: 1 / -1; */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-flow: column;
+  align-items: center;
+  grid-gap: 10px;
+  background: var(--green);
+  color: var(--black);
+}
+
+.navbar-item:hover,
+.navbar>a:hover {
+  color: var(--white) !important;
+  text-decoration: underline;
+}
+
+.navbar-item:first-of-type {
+  margin-left: 50px;
+}
+
+.navbar-item {
+  padding: 10px;
+  font-size: 2em;
+}
+
+.navbar-item:last-of-type {
+  margin-right: 50px;
+  padding-right: 0;
+}
+
+.display-card {
+  display: grid;
+  background: rgb(255, 255, 255, 0.7);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.recipe {
+  justify-self: left;
+}
+
+#search-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#search-form>label {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.add-favorite {
+  background: none;
+  border: none;
+}
+
+.form-subheader {
+  display: inline;
+}
+
+.ingredient-section>h5 {
+  font-size: 20px;
 }

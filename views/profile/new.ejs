@@ -1,12 +1,13 @@
 <h2 class="page-header">Add a new beer recipe</h2>
 
-<form class="form" action='/profile/recipes/new' method='post'>
-  <%# META-DATA %> 
-  <div class="form-section">
+<form id="new-recipe" class="form" action='/profile/new'>
+<%# META-DATA %> 
+<div class="form-section">
+  <input hidden id="userId" value="<%= currentUser.id %>" name="userId">
     <h3 class="form-section-header">Meta Data</h3>
     <div class="form-element">
       <label for='name'>Name</label>
-      <input id='name' type='text' name='name'>
+      <input id='name' type='text' name='name' required>
     </div>
     <div class="form-element">
       <label for='style'>Style</label>
@@ -14,7 +15,7 @@
     </div>
     <div class="form-element">
       <label for='batchSize'>Batch Size</label>
-      <input id='batchSize' type='text' name='batchSize'>
+      <input id='batchSize' type='text' name='batchSize' required>
     </div>
     <div class="form-element">
       <label for='abv'>ABV</label>
@@ -34,11 +35,11 @@
     </div>
     <div class="form-element">
       <label for='target-og'>Target Original Gravity</label>
-      <input type='integer' name='targetOg'>
+      <input id='target-og' type='integer' name='targetOg'>
     </div>
     <div class="form-element">
       <label for='target-fg'>Target Final Gravity</label>
-      <input type='integer' name='targetFg'>
+      <input id='target-og' type='integer' name='targetFg'>
     </div>
     <div class="form-element">
       <label for='mash-temp'>Mash Temperature</label>
@@ -55,13 +56,14 @@
   <div class="form-section">
     <h3 class="form-section-header">Ingredients</h3>    
     <h4 class="form-subheader">Malts</h4>
+    <a class="button add-button" id="malt">Add Another Malt</a>
     <div class="form-element">
       <label for='malt-name'>Name</label>
       <input id='malt-name' type='text' name='maltName'>
     </div>
     <div class="form-element">
       <label for='malt-qty'>Amount</label>
-      <input id='malt-qty' type='integer' name='maltQty'>
+      <input id='malt-qty' type='float' name='maltQty'>
     </div>
     <div class="form-element">
       <label for='malt-unit'>Unit</label>
@@ -78,7 +80,6 @@
       </select>
     </div>
     <div class="form-element" id="malt-form-control">
-      <a class="button add-button" id="malt">Add Another Malt</a>
     </div>
 
     <%# This div displays the ingredients on button press. %>
@@ -88,24 +89,22 @@
   <%# HOPS %> 
   <div class="form-section">
     <h4 class="form-subheader">Hops</h4>
+    <a class="button add-button" id="hop">Add Another Hop</a>
     <div class="form-element">
       <label for='hop-name'>Name</label>
       <input id='hop-name' type='text' name='hopName'>
     </div>
     <div class="form-element">
       <label for='hop-qty'>Amount</label>
-      <input id='hop-qty' type='integer' name='hopQty'>
+      <input id='hop-qty' type='float' name='hopQty'>
     </div>
     <div class="form-element">
       <label for='hop-time'>Time</label>
       <select id='hop-time' name='hopTime'>
-        <option value='90'>90 mins</option>
-        <option value='75'>75 mins</option>
-        <option value='60'>60 mins</option>
-        <option value='45'>45 mins</option>
-        <option value='30'>30 mins</option>
-        <option value='15'>15 mins</option>
-        <option value='15'>Dry</option>
+        <option value='start'>Start</option>
+        <option value='middle'>Middle</option>
+        <option value='end'>End</option>
+        <option value='dry'>Dry</option>
       </select>
     </div>
     <div class="form-element">
@@ -116,7 +115,6 @@
       </select>
     </div>
     <div class="form-element" id="hop-form-control">
-      <a class="button add-button" id="hop">Add Another Hop</a>
     </div>
 
     <%# This div displays the ingredients on button press. %>
@@ -126,16 +124,17 @@
   <%# ADJUNCTS %> 
   <div class="form-section">
     <h4 class="form-subheader">Adjuncts</h4>
+    <a class="button add-button" id="adjunct">Add Another Adjunct</a>
+
     <div class="form-element">
       <label for='adjunct-name'>Name</label>
       <input id='adjunct-name' type='text' name='adjunctName'>
     </div>
     <div class="form-element">
       <label for='adjunct-qty'>Amount</label>
-      <input id='adjunct-qty' type='integer' name='adjunctQty'>
+      <input id='adjunct-qty' type='float' name='adjunctQty'>
     </div>
     <div class="form-element" id="adjunct-form-control">
-      <a class="button add-button" id="adjunct">Add Another Adjunct</a>
     </div>
 
     <%# This div displays the ingredients on button press. %>
@@ -158,8 +157,6 @@
 
 <script>
 $(document).ready(function() {
-  const newMalt = '<'
-
   $('.add-button').click(function(e) {
     e.preventDefault();
     const type = $(this).attr('id');
@@ -178,9 +175,17 @@ $(document).ready(function() {
 
     const newItem = `
       <div class="ingredient">
-        <p>${name} ${qty} ${unit} ${form} ${time} ${use}</p>
-        <a class="button remove">Remove Ingredient</a>
-      </div> `
+        <p data-category="${type}">
+          <span data-type="name">${name} </span>
+          <span data-type="qty">${qty} </span>
+          <span data-type="unit">${unit} </span>
+          <span data-type="form">${form} </span>
+          <span data-type="time">${time} </span>
+          <span data-type="use">${use} </span>
+          <a class="button remove">Remove Ingredient</a>
+        </p>
+      </div>
+    `;
 
     $(`#archive-${type}`).append(newItem);
     $(`#${type}-name`).val('');
@@ -190,6 +195,132 @@ $(document).ready(function() {
   $('.ingredient-archive').on('click', 'a', function(e) {
     e.preventDefault();
     $(this).parent().remove();
+  });
+
+
+  $('#new-recipe').submit(function(e) {
+    e.preventDefault();
+    
+    let malts = [];
+    let hops = [];
+    let adjuncts = [];
+    
+    // Deal with the inputs in the malts section if they exist.
+    if( $('#malt-name').val() && $('#malt-qty').val() ) {
+      const maltAssembler = {
+        name: $('#malt-name').val(),
+        amount: {
+          value: $('#malt-qty').val(),
+          unit: $('#malt-unit').val()
+        },
+        form: $('#malt-form').val()
+      };
+      malts.push(maltAssembler);
+    } else {
+      console.log('No name or qty');
+    }
+    
+    // Deal with the archived malts section.
+    const collectedMalts = Array.from($('p[data-category="malt"]'));
+    collectedMalts.forEach(malt => {
+      const maltAssembler = {
+        name: malt.children[0].textContent,
+        amount: {
+          value: malt.children[1].textContent,
+          unit: malt.children[2].textContent
+        },
+        form: malt.children[3].textContent
+      };
+      malts.push(maltAssembler);
+    });
+    
+    // Deal with the inputs in the hops section if they exist.
+    if($('#hop-name').val() && $('#hop-qty').val()) {
+      const hopAssembler = {
+        name: $('#hop-name').val(),
+        amount: {
+          value: $('#hop-qty').val(),
+          unit: "grams"
+        },
+        add: $('#hop-time').val(),
+        attribute: $('#hop-use').val()
+      };
+      hops.push(hopAssembler);
+    }
+    
+    // Deal with the archived hops section.
+    const collectedHops = Array.from($('p[data-category="hop"]'));
+    collectedHops.forEach(hop => {
+      const hopAssembler = {
+        name: hop.children[0].textContent,
+        amount: {
+          value: hop.children[1].textContent,
+          unit: "grams"
+        },
+        add: hop.children[4].textContent,
+        attribute: hop.children[5].textContent
+      };
+      hops.push(hopAssembler);
+    });
+    
+    // Deal with the inputs in the adjuncts section if they exist.
+    if($('#adjunct-name').val() && $('#adjunct-qty').val()) {
+      const adjunctAssembler = {
+        name: $('#adjunct-name').val(),
+        amount: {
+          value: $('#adjunct-qty').val(),
+          unit: "grams"
+        }
+      };
+      adjuncts.push(adjunctAssembler);
+    }
+    
+    // Deal with the archived hops section.
+    const collectedAdjuncts = Array.from($('p[data-category="adjunct"]'));
+    collectedAdjuncts.forEach(adjunct => {
+      const adjunctAssembler = {
+        name: adjunct.children[0].textContent,
+        amount: {
+          value: adjunct.children[1].textContent,
+          unit: "grams"
+        }
+      }
+      adjuncts.push(adjunctAssembler);
+    });
+    
+    // Package all the ingredients together
+    const ingredients = {
+      malt: malts,
+      hops: hops,
+      adjunct: adjuncts,
+      yeast: $('#yeast-name').val()
+    }
+
+    const data = {
+      name: $('#name').val(),
+      style: $('#style').val(),
+      batchSize: $('#batchSize').val(),
+      abv: $('#abv').val(),
+      ibu: $('#ibu').val(),
+      srm: $('#srm').val(),
+      ebc: $('#ebc').val(),
+      targetOg: $('#target-og').val(),
+      targetFg: $('#target-fg').val(),
+      mashTemp: $('#mash-temp').val(),
+      fermTemp: $('#ferm-temp').val(),
+      ingredients: JSON.stringify(ingredients),
+      userId: $('#userId').val()
+    };
+    
+    $.ajax({
+      method: 'post',
+      url: $(this).attr('action'),
+      data: data
+    }).done(function() {
+      window.location = "/profile/recipes";
+    }).fail(function(err) {
+      console.log(err)
+    });
   });
 });
 

@@ -1,10 +1,13 @@
+<div class="show">
 <h2><%= recipe.name %> </h2>
 <h3><%= recipe.style %> </h3>
 
-<a href="/profile/recipes/<%= recipe.id %>" class="button" id="delete-recipe">DELETE RECIPE</a>
+<a href="/profile/recipes/edit/<%= recipe.id %>" class="button button-small" id="edit-recipe">EDIT RECIPE</a>
+<a href="/profile/recipes/<%= recipe.id %>" class="button button-small" id="delete-recipe">DELETE RECIPE</a>
 
+<div class="show-meta">
 <h4>Meta data</h4>
-Batch Size: <%= recipe.batchSize %> <br>
+<p>Batch Size: <%= recipe.batchSize %> <br>
 ABV: <%= recipe.abv %> <br>
 IBU: <%= recipe.ibu %> <br>
 SRM: <%= recipe.srm %> <br>
@@ -12,37 +15,41 @@ EBC: <%= recipe.ebc %> <br>
 Target Starting Gravity: <%= recipe.targetOg %> <br>
 Target Final Gravity: <%= recipe.targetFg %> <br>
 Mash Temperature: <%= recipe.mashTemp %> <br>
-Fermentation Temperature: <%= recipe.fermTemp %> 
+Fermentation Temperature: <%= recipe.fermTemp %></p> 
+</div>
 
 <br><br>
 
-<h4>Ingredients</h4>
-<% const parsedIngredients = JSON.parse(recipe.ingredients) %> 
-    <h5>Malts</h5>
-    <% parsedIngredients.malt.forEach( m => { %>
-      <div>
-        <p>Malt: <%= m.name %> <%= m.amount.value %> <%= m.amount.unit %>  </p>
-      </div>
-    <% }) %> 
-    <h5>Hops</h5>
-    <% parsedIngredients.hops.forEach( h => { %>
-      <div>
-        <p>Hop: <%= h.name %> <%= h.amount.value %> <%= h.amount.unit %> Include at: <%= h.add %>  </p>
-      </div>
-    <% }) %> 
-    <% if (parsedIngredients.adjuncts) { %> 
-      <h5>Adjuncts</h5>
-      <% parsedIngredients.adjuncts.forEach( a => { %>
+<h4 class="ingredient-header">Ingredients</h4>
+  <div class="ingredient-section">
+  <% const parsedIngredients = JSON.parse(recipe.ingredients) %> 
+      <h5>Malts</h5>
+      <% parsedIngredients.malt.forEach( m => { %>
         <div>
-          <p>Adjunct: <%= a.adjunctName %> <%= a.adjunctQty %> oz </p>
+          <p>Malt: <%= m.name %> <%= m.amount.value %> <%= m.amount.unit %>  </p>
         </div>
       <% }) %> 
-    <% } %>
-    <h5>Yeast</h5>
-    <div>
-      <p>Yeast: <%= parsedIngredients.yeast %></p>
+      <h5>Hops</h5>
+      <% parsedIngredients.hops.forEach( h => { %>
+        <div>
+          <p>Hop: <%= h.name %> <%= h.amount.value %> <%= h.amount.unit %> Include at: <%= h.add %>  </p>
+        </div>
+      <% }) %> 
+      <% if (parsedIngredients.adjuncts) { %> 
+        <h5>Adjuncts</h5>
+        <% parsedIngredients.adjuncts.forEach( a => { %>
+          <div>
+            <p>Adjunct: <%= a.adjunctName %> <%= a.adjunctQty %> oz </p>
+          </div>
+        <% }) %> 
+      <% } %>
+      <h5>Yeast</h5>
+      <div>
+        <p>Yeast: <%= parsedIngredients.yeast %></p>
+      </div>
     </div>
   </div>
+</div>
 
 <script>
   $('#delete-recipe').click(function(e) {

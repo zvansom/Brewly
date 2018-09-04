@@ -1,7 +1,7 @@
 <h2><%= currentUser.firstname %>'s Recipes</h2>
 
+<div class="display-card">
 <% recipes.forEach(r => { %> 
-  <div>
-    <h4><a href="/profile/recipes/<%= r.id %>"><%= r.name %></a></h4>
-    
+  <h4 class="recipe"><a href="/profile/recipes/<%= r.id %>"><%= r.name %></a></h4>
 <% }); %> 
+</div>
