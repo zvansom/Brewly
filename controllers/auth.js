@@ -33,7 +33,7 @@ router.post('/signup', (req, res) => {
       if (wasCreated) { // Expected behavior
         // Log the user in
         passport.authenticate('local', {
-          successRedirect: '/profile',
+          successRedirect: '/profile/recipes',
           successFlash: 'Successfully logged in.',
           failureRedirect: '/',
           failureFlash: 'Authenticate failed.'
