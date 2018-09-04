@@ -9,10 +9,6 @@ const loggedIn = require('../middleware/loggedIn');
 
 const punkApiSearch = "https://api.punkapi.com/v2/beers?beer_name=";
 
-router.get('/', loggedIn, (req, res) => {
-  res.render('profile/index');
-});
-
 router.get('/recipes', loggedIn, (req, res) => {
   db.recipe.findAll({ where: { userId: req.user.id} })
   .then(recipes => res.render('profile/recipes', { recipes } ))
