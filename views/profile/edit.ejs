@@ -1,0 +1,170 @@
+<h2>Edit Recipe</h2>
+
+<form id="new-recipe" class="form" action='/profile/recipes/<%= recipe.id %>'>
+<%# META-DATA %> 
+<div class="form-section">
+    <input hidden id="userId" value="<%= currentUser.id %>" name="userId">
+    <h3 class="form-section-header">Meta Data</h3>
+    <div class="form-element">
+      <label for='name'>Name</label>
+      <input id='name' type='text' name='name' value="<%= recipe.name %>">
+    </div>
+    <div class="form-element">
+      <label for='style'>Style</label>
+      <input id='style' type='text' name='style' value="<%= recipe.style %>">
+    </div>
+    <div class="form-element">
+      <label for='batchSize'>Batch Size</label>
+      <input id='batchSize' type='text' name='batchSize' value="<%= recipe.batchSize %>">
+    </div>
+    <div class="form-element">
+      <label for='abv'>ABV</label>
+      <input id='abv' type='integer' name='abv' value="<%= recipe.abv %>">
+    </div>
+    <div class="form-element">  
+      <label for='ibu'>IBU</label>
+      <input id='ibu' type='integer' name='ibu' value="<%= recipe.ibu %>">
+    </div>
+    <div class="form-element">
+      <label for='srm'>SRM</label>
+      <input id='srm' type='integer' name='srm' value="<%= recipe.srm %>">
+    </div>
+    <div class="form-element">
+      <label for='ebc'>EBC</label>
+      <input id='ebc' type='integer' name='ebc' value="<%= recipe.ebc %>">
+    </div>
+    <div class="form-element">
+      <label for='target-og'>Target Original Gravity</label>
+      <input id='target-og' type='integer' name='targetOg' value="<%= recipe.targetOg %>">
+    </div>
+    <div class="form-element">
+      <label for='target-fg'>Target Final Gravity</label>
+      <input id='target-og' type='integer' name='targetFg' value="<%= recipe.targetFg %>">
+    </div>
+    <div class="form-element">
+      <label for='mash-temp'>Mash Temperature</label>
+      <input id='mash-temp' type='integer' name='mashTemp' value="<%= recipe.mashTemp %>">
+    </div>
+    <div class="form-element">
+      <label for='ferm-temp'>Fermentation Temperature</label>
+      <input id='ferm-temp' type='integer' name='fermTemp' value="<%= recipe.fermTemp %>">
+    </div>
+    <h4>Ingredients</h4>
+    <h5>Malts</h5>
+    <% const parsedIngredients = JSON.parse(recipe.ingredients) %>
+    <% parsedIngredients.malt.forEach( (malt, idx) => { %>
+    <div class="form-element" data-malt="idx">
+      <input type="text" name="malt-name" value="<%= malt.name %>" >
+      <input type="text" name="malt-qty" value="<%= malt.amount.value %>" >
+      <input type="text" name="malt-unit" value="<%= malt.amount.unit %>" >
+      <br>
+    </div>
+    <% }) %> 
+    <h5>Hops</h5>
+    <% parsedIngredients.hops.forEach( (hop, idx) => { %>
+    <div class="form-element" data-hop="idx">    
+      <input type="text" name="hop-name-<%= idx %>" value="<%= hop.name %>" >
+      <input type="text" name="hop-qty-<%= idx %>" value="<%= hop.amount.value %>">
+      <input type="text" name="hop-unit-<%= idx %>" value="<%= hop.amount.unit %>">
+      <input type="text" name="hop-time-<%= idx %>" value="<%= hop.add %>">
+      <input type="text" name="hop-use-<%= idx %>" value="<%= hop.attribute %>">
+      <br>
+    </div>
+    <% }); %>
+    <% if (parsedIngredients.adjunct) { %>
+      <h5>Adjuncts</h5>
+      <% parsedIngredients.adjunct.forEach( (a, idx) => { %>
+      <div class="form-element" data-adjunct="idx">
+        <input type="text" name="adjunct-name-<%= idx %>" value="<%= a.name %>" >
+        <input type="text" name="adjunct-qty-<%= idx %>" value="<%= a.amount %>">
+        <br>
+      </div>
+      <% }); %>
+    <% } %>
+    <h5>Yeast</h5>
+    <div class="form-element">    
+      <input id="yeast" type="text" name="yeast-name" value="<%= parsedIngredients.yeast %>" >
+    </div>
+  <div class="form-section">
+    <input class="button" id='submit-new' type='submit' value='submit'>
+  </div>
+</form>
+
+<script>
+$(document).ready(function() {
+  $('#new-recipe').submit(function(e) {
+    e.preventDefault();
+    const maltData = [];
+    const malts = Array.from($('[data-malt]'));
+    malts.forEach(malt => {
+      const m = {
+        name: malt.children[0].value,
+        amount: {
+            value: malt.children[1].value,
+            unit: malt.children[2].value
+        }
+      };
+      maltData.push(m);
+    });
+
+    const hopData = [];
+    const hops = Array.from($('[data-hop]'));
+    hops.forEach(hop => {
+      const h = {
+        name: hop.children[0].value,
+        amount: {
+          value: hop.children[1].value,
+          unit: hop.children[2].value
+        },
+        add: hop.children[3].value,
+        attribute: hop.children[4].value
+      };
+      hopData.push(h);
+    });
+
+    const adjunctData = [];
+    const adjuncts = Array.from($('[data-adjunct]'));
+    if(adjuncts) {
+      adjuncts.forEach(adjunct => {
+        const a = {
+          name: adjunct.children[0].value,
+          amount: adjunct.children[1].value
+        };
+        adjunctData.push(a);
+      });
+    }
+
+    const ingredients = {
+      malt: maltData,
+      hops: hopData,
+      adjuncts: adjunctData,
+      yeast: $('#yeast').val()
+    }
+
+    const data = {
+      name: $('#name').val(),
+      style: $('#style').val(),
+      batchSize: $('#batchSize').val(),
+      abv: $('#abv').val(),
+      ibu: $('#ibu').val(),
+      srm: $('#srm').val(),
+      ebc: $('#ebc').val(),
+      targetOg: $('#target-og').val(),
+      targetFg: $('#target-fg').val(),
+      mashTemp: $('#mash-temp').val(),
+      fermTemp: $('#ferm-temp').val(),
+      ingredients: JSON.stringify(ingredients)
+    }
+
+    $.ajax({
+      method: 'put',
+      url: $(this).attr('action'),
+      data: data
+    }).done(function() {
+      window.location = "/profile/recipes";
+    }).fail(function(err) {
+      console.log(err);
+    });
+  });
+});
+</script>

@@ -42,51 +42,9 @@ router.get('/new', loggedIn, (req, res) => {
 });
 
 router.post('/new', loggedIn, (req, res) => {
-  const targetOg = req.body.targetOgLow + ' - ' + req.body.targetOgHigh;
-  const targetFg = req.body.targetFgLow + ' - ' + req.body.targetFgHigh;
-
-  // Ingredients object constructor
-  const ingredients = {
-    malts: [
-      {
-        maltName: req.body.maltName,
-        maltQty: req.body.maltQty,
-        maltUnit: req.body.maltUnit,
-        maltExtract: req.body.maltExtract
-      }
-    ],
-    hops: [
-      {
-        hopName: req.body.hopName,
-        hopQty: req.body.hopQty,
-        hopTime: req.body.hopTime
-      }
-    ],
-    adjuncts: [
-      {
-        adjunctName: req.body.adjunctName,
-        adjunctQty: req.body.adjunctQty
-      }
-    ],
-    yeast: req.body.yeastName
-  };
-
-  db.recipe.create({ 
-    name: req.body.name,
-    style: req.body.style,
-    batchSize: req.body.batchSize,
-    abv: req.body.abv,
-    ibu: req.body.ibu,
-    srm: req.body.srm,
-    ebc: req.body.ebc,
-    targetOg: targetOg,
-    targetFg: targetFg,
-    mashTemp: req.body.mashTemp,
-    fermTemp: req.body.fermTemp,
-    ingredients: JSON.stringify(ingredients)
-   });
-
-    res.redirect('/profile');
+  db.recipe.create(req.body)
+  .then( createdRecipe => res.redirect('/profile/recipes') )
+  .catch(err => res.send(err) );
 });
 
 router.get('/find', loggedIn, (req, res) => {
@@ -119,6 +77,33 @@ router.get('/recipes/:id', loggedIn, (req, res) => {
   db.recipe.findOne({ where: { id: req.params.id } })
   .then(recipe => res.render('profile/show', { recipe }))
   .catch(err => res.send(err));
+});
+
+router.get('/recipes/edit/:id', loggedIn, (req, res) => {
+  db.recipe.findOne({ where: { id: req.params.id } })
+  .then( recipe => res.render('profile/edit', { recipe }) )
+  .catch( err => console.log(err));
+});
+
+router.put('/recipes/:id', loggedIn, (req, res) => {
+  db.recipe.update({ 
+    name: req.body.name,
+    style: req.body.style,
+    batchSize: req.body.batchSize,
+    abv: req.body.abv,
+    ibu: req.body.ibu,
+    srm: req.body.srm,
+    ebc: req.body.ebc,
+    ingredients: req.body.ingredients,
+    targetOg: req.body.targetOg,
+    targetFg: req.body.targetFg,
+    mashTemp: req.body.mashTemp,
+    fermTemp: req.body.fermTemp
+   }, { where: { id: req.params.id } })
+  .then( recipe => {
+    res.sendStatus(200);
+  })
+  .catch(err => console.log(err));
 });
 
 router.delete('/recipes/:id', loggedIn, (req, res) => {
